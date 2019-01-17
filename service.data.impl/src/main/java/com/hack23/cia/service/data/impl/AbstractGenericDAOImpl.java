@@ -36,8 +36,10 @@ import javax.persistence.metamodel.Metamodel;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.hibernate.CacheMode;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.Search;
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.jpa.FullTextEntityManager;
+import org.hibernate.search.mapper.orm.jpa.FullTextQuery;
+import org.hibernate.search.mapper.orm.jpa.FullTextQueryResultDefinitionContext;
 import org.javers.spring.annotation.JaversAuditable;
 
 import com.hack23.cia.service.data.api.AbstractGenericDAO;
@@ -363,10 +365,15 @@ abstract class AbstractGenericDAOImpl<T extends Serializable, I extends Serializ
 
 	@Override
 	public final List<T> search(final String searchExpression, final Integer maxResults, final String... fields) {
-		return getFullTextEntityManager().createFullTextQuery(
-				getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(persistentClass).get()
-						.keyword().wildcard().onFields(fields).matching(searchExpression).createQuery(),
-				persistentClass).setMaxResults(maxResults).getResultList();
+		final FullTextQueryResultDefinitionContext<T> queryResult = getFullTextEntityManager().search(persistentClass).query();
+		final FullTextQuery<T> query = queryResult.asEntities()
+	        .predicate( factory -> factory.match()
+	                .onFields( fields)
+	                .matching( searchExpression )
+	                .toPredicate()
+	        )
+	        .build();
+		return query.setMaxResults(maxResults).getResultList();
 	}
 
 }

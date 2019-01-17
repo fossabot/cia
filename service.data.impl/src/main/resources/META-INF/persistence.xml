@@ -87,13 +87,6 @@
 		<class>com.hack23.cia.model.internal.application.user.impl.UserAccount</class>
 		<class>com.hack23.cia.model.internal.application.secure.impl.EncryptedValue</class>
 
-		<class>com.hack23.cia.model.internal.application.view.impl.DataSourceContent</class>
-		<class>com.hack23.cia.model.internal.application.view.impl.OperationalInformationContent</class>
-		<class>com.hack23.cia.model.internal.application.view.impl.PerformanceIndicatorContent</class>
-		<class>com.hack23.cia.model.internal.application.view.impl.QualityAssuranceContent</class>
-		<class>com.hack23.cia.model.internal.application.view.impl.TargetProfileContent</class>
-		<class>com.hack23.cia.model.internal.application.view.impl.ApplicationView</class>
-
 		<class>com.hack23.cia.model.internal.application.data.ministry.impl.ViewRiksdagenMinistry</class>
 		<class>com.hack23.cia.model.internal.application.data.ministry.impl.ViewRiksdagenGovermentRoleMember</class>
 
@@ -188,9 +181,18 @@
 			<property name="hibernate.session.events.log" value="false"/>
 			<property name="hibernate.connection.charSet" value="UTF-8" />
 			<property name="hibernate.enable_lazy_load_no_trans" value="true"/>
-			<property name="hibernate.search.model_mapping" value="com.hack23.cia.service.data.impl.DataSearchMappingFactory"/>
-			<property name="hibernate.search.default.directory_provider" value="filesystem"/>
 
+
+			<property name="hibernate.search.backends.myBackend.type" value="org.hibernate.search.backend.lucene.impl.LuceneBackendFactory"/> 
+			<property name="hibernate.search.backends.myBackend.lucene.directory_provider" value="local_directory"/>
+ 			<property name="hibernate.search.backends.myBackend.analysis_configurer" value="com.hack23.cia.service.data.impl.DataSearchAnalysisConfigurer"/>
+ 			
+ 			
+ 			<property name="hibernate.search.mapping_configurer" value="com.hack23.cia.service.data.impl.DataSearchMapping"/>
+ 			
+          	<property name="hibernate.search.indexes.default.backend" value="myBackend"/>
+            <property name="hibernate.search.indexing_strategy" value="manual" />
+            
 		</properties>
 	</persistence-unit>
 </persistence>
