@@ -183,15 +183,31 @@
 			<property name="hibernate.enable_lazy_load_no_trans" value="true"/>
 
 
-			<property name="hibernate.search.backends.myBackend.type" value="org.hibernate.search.backend.lucene.impl.LuceneBackendFactory"/> 
-			<property name="hibernate.search.backends.myBackend.lucene.directory_provider" value="local_directory"/>
- 			<property name="hibernate.search.backends.myBackend.analysis_configurer" value="com.hack23.cia.service.data.impl.DataSearchAnalysisConfigurer"/>
+			<property name="hibernate.search.backends.myBackend.type" value="lucene"/> 			
+  			<property name="hibernate.search.backends.myBackend.lucene.directory_provider" value="local_directory"/>
+ 			<property name="hibernate.search.backends.myBackend.directory_provider" value="local_directory"/>
+ 			<property name="hibernate.search.default_backend" value="myBackend"/> 		
+
+ 			<property name="hibernate.search.default.indexwriter.max_thread_states" value="64"/> 		
+ 			<property name="hibernate.search.default.indexwriter.infostream" value="false"/> 		
  			
- 			
+
+<!--            	<property name="hibernate.search.indexes.default.backend" value="myBackend"/>
+ -->
+<!--           	<property name="hibernate.search.indexes.default.directory_provider" value="local_directory" />          	
+ 			<property name="hibernate.search.default.directory_provider" value="local_directory" />
+ -->
+
+<!--   			<property name="hibernate.search.default.root_directory" value=""/> 
+          	<property name="hibernate.search.indexes.default.root_directory" value=""/> 
+  			<property name="hibernate.search.backends.myBackend.root_directory" value=""/> 
+  			<property name="hibernate.search.backends.myBackend.lucene.root_directory" value=""/> 
+ -->			
+ 			<property name="hibernate.search.backends.myBackend.analysis_configurer" value="com.hack23.cia.service.data.impl.DataSearchAnalysisConfigurer"/> 			
  			<property name="hibernate.search.mapping_configurer" value="com.hack23.cia.service.data.impl.DataSearchMapping"/>
  			
-          	<property name="hibernate.search.indexes.default.backend" value="myBackend"/>
-            <property name="hibernate.search.indexing_strategy" value="manual" />
+ 			<property name="hibernate.search.backends.myBackend.index_defaults.refresh_after_write" value="true"/>
+   			<property name="hibernate.search.indexing_strategy" value="manual" />
             
 		</properties>
 	</persistence-unit>

@@ -366,7 +366,7 @@ abstract class AbstractGenericDAOImpl<T extends Serializable, I extends Serializ
 	@Override
 	public final List<T> search(final String searchExpression, final Integer maxResults, final String... fields) {
 		final FullTextQueryResultDefinitionContext<T> queryResult = getFullTextEntityManager().search(persistentClass).query();
-		final FullTextQuery<T> query = queryResult.asEntities()
+		final FullTextQuery<T> query = queryResult.asEntity()
 	        .predicate( factory -> factory.match()
 	                .onFields( fields)
 	                .matching( searchExpression )

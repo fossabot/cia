@@ -155,6 +155,8 @@
 				<prop key="hibernate.javax.cache.uri">classpath://ehcache.xml</prop>
 
 				<prop key="hibernate.search.default.indexBase">${database.search.index.location}</prop>
+				
+				
 				<!-- Elasticsearch integration
 				<prop key="hibernate.search.default.indexmanager">elasticsearch</prop>
 				<prop key="hibernate.search.default.elasticsearch.host">http://127.0.0.1:9200</prop>

@@ -72,7 +72,7 @@ public class SearchIndexerImplITest extends AbstractServiceDataFunctionalIntegra
 	public void testSearchIndex() throws Exception {
 		final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
 		final FullTextQueryResultDefinitionContext<DocumentContentData> queryResult = fullTextEntityManager.search(DocumentContentData.class).query();
-		final FullTextQuery<DocumentContentData> query = queryResult.asEntities()
+		final FullTextQuery<DocumentContentData> query = queryResult.asEntity()
 	        .predicate( factory -> factory.match()
 	                .onFields( "content")
 	                .matching( "programmering" )
